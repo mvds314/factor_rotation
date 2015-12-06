@@ -1,9 +1,5 @@
 # factor_rotation
-This Python package the gradient projection rotation algorithms (GPA)
-developed by Bernaards, C.A. and Jennrich, R.I.
-The code is based on code developed Bernaards, C.A. and Jennrich, R.I.
-and is ported and made available with permission of the authors.
-The package uses numpy.
+This Python package contains several factor rotation algorithms. It contains three families of rotation methods: oblimin (for orthogonal and oblique rotation), orthomax (for orthogonal rotation) and the Crawford-Ferguson family (for orthogonal and oblique rotation). As special cases of these families the following rotation methods are supported: quartimin, biquartimin, quartimax, biquartimax, varimax, equamax, parsimax, parsimony. Additionally the following methods are supported: target rotation, partial target rotation, promax and Procrustes.
 
 Basic example:
 
@@ -13,3 +9,4 @@ Basic example:
     print(L)
     print(A.dot(T))
 
+For more details see the example file in the package and the documentation.
