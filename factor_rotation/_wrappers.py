@@ -3,8 +3,8 @@
 from __future__ import division
 from __future__ import print_function
 
-import _gpa_rotation as gr
-import _analytic_rotation as ar
+import factor_rotation._gpa_rotation as gr
+import factor_rotation._analytic_rotation as ar
 import numpy as np
 import unittest
 
@@ -199,12 +199,12 @@ def rotate_factors(A, method, *method_args, **algorithm_kwargs):
     >>> L, T = rotate_factors(A,'quartimin',0.5)
     >>> np.allclose(L,A.dot(np.linalg.inv(T.T)))
     """
-    if algorithm_kwargs.has_key('algorithm'):
+    if 'algorithm' in algorithm_kwargs:
         algorithm = algorithm_kwargs['algorithm']
         algorithm_kwargs.pop('algorithm')
     else:
         algorithm = 'gpa'
-    assert not algorithm_kwargs.has_key('rotation_method'), 'rotation_method cannot be provided as keyword argument'
+    assert 'rotation_method' not in algorithm_kwargs, 'rotation_method cannot be provided as keyword argument'
     L=None
     T=None
     ff=None
@@ -357,8 +357,8 @@ class unittests(unittest.TestCase):
         
     def _test_template(self, method,*method_args, **algorithms):
         A=self.get_A()
-        algorithm1= 'gpa' if not algorithms.has_key('algorithm1') else algorithms['algorithm1']
-        algorithm2= 'gpa_der_free' if not algorithms.has_key('algorithm1') else algorithms['algorithm1']
+        algorithm1= 'gpa' if 'algorithm1' not in algorithms else algorithms['algorithm1']
+        algorithm2= 'gpa_der_free' if 'algorithm1' not in algorithms else algorithms['algorithm1']
         L1, T1 = rotate_factors(A,method,*method_args, algorithm = algorithm1)        
         L2, T2 = rotate_factors(A,method,*method_args, algorithm = algorithm2)
         self.assertTrue(np.allclose(L1, L2, atol=1e-5))
